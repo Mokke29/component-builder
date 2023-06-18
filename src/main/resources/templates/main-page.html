@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>MAIN</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="/css/main.css" />
+  </head>
+  <body class="bg-color-navy">
+    <a th:href="@{/chat?(id=${sessionId})}">CHAT</a>
+    <p id="newSession" th:utext="${sessionId}">
+      This is some text inside a paragraph.
+    </p>
+    <div th:replace="~{logout-component :: logout-component}"></div>
+    <script type="text/javascript">
+      var paragraph = document.getElementById('newSession');
+      var text = paragraph.textContent;
+      var newLink = 'http://localhost:8080/chat?id=' + text;
+      console.log(newLink);
+      window.location.href = newLink;
+    </script>
+  </body>
+</html>

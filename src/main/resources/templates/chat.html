@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:fragment="head">
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>Application</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <div class="flex h-screen">
+      <div class="navbar flex flex-col bg-color-navy">
+        <div class="py-4 px-6 bg-color-navy text-white">
+          <div class="flex items-center text-center">
+            <span class="text-3xl font-bold text-color-green">C</span>
+            <span class="text-3xl font-bold text-color-light-slate"
+              >Builder</span
+            >
+          </div>
+        </div>
+        <nav class="flex-1 px-4 py-8 ml-3">
+          <ul class="space-y-4">
+            <li>
+              <button
+                th:onclick="newSession([[${sessionId}]])"
+                class="mb-20 px-6 py-2.5 mt-8 rounded-sm btn-color bg-transparent border-2 text-sm font-semibold hover:delay-150 hover:duration-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              >
+                New component
+              </button>
+            </li>
+            <form th:action="@{/chat?(id=${sessionId})}" method="post">
+              <fieldset>
+                <div class="form-group">
+                  <textarea
+                    id="message"
+                    type="text"
+                    name="prompt"
+                    rows="4"
+                    required
+                    th:value="${request}"
+                    class="max-w-lg bg-color-light-navy"
+                  ></textarea>
+                </div>
+                <div class="row">
+                  <input
+                    type="submit"
+                    class="mt-4 px-5 py-2 input-send rounded-sm btn-color bg-transparent border text-sm font-semibold hover:delay-150 hover:duration-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                    value="Send message"
+                  />
+                </div>
+              </fieldset>
+            </form>
+            <button
+              th:onclick="saveSession([[${sessionId}]])"
+              class="py-2 px-5 rounded-sm btn-color bg-transparent border text-sm font-semibold hover:delay-150 hover:duration-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            >
+              Save
+            </button>
+            <button
+              id="copy-button"
+              class="input-send px-2.5 py-2 ml-2 rounded-sm copy-icon bg-transparent text-lg font-semibold hover:delay-150 hover:duration-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            >
+              <i id="copy-icon" class="fas fa-clipboard"></i>
+            </button>
+          </ul>
+        </nav>
+        <form action="#" th:action="@{/logout}" method="POST" class="">
+          <input
+            type="submit"
+            value="Logout"
+            class="mt-auto input-send ml-6 mb-4 px-2 py-1.5 rounded-sm logout-btn-color bg-transparent border text-sm font-semibold hover:delay-150 hover:duration-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          />
+        </form>
+      </div>
+      <!-- History -->
+      <div class="flex flex-col bg-color-navy text-white">
+        <nav class="flex-1 px-4 scrollable-panel">
+          <ul class="space-y-4">
+            <div class="container mx-auto px-4 py-8">
+              <div th:each="componentSession : ${sessionsList}">
+                <!--Generated component starts here-->
+                <div
+                  th:if="${componentSession.id != sessionId}"
+                  class="border border-color-light-slate p-4 rounded-sm flex flex-col items-start mb-4 object-cover max-w-md"
+                >
+                  <div th:if="${componentSession.saved == false}">
+                    <i class="fas fa-times-circle text-red-500"></i>
+                  </div>
+                  <div
+                    class="p-4 mb-4"
+                    th:utext="${componentSession.component}"
+                  >
+                    HERE
+                  </div>
+                  <div class="flex items-center mb-2">
+                    <button
+                      th:onclick="changeSession([[${componentSession.id}]])"
+                      class="py-1.5 px-2.5 ml-4 rounded-sm btn-color bg-transparent border text-sm font-semibold hover:delay-150 hover:duration-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                    >
+                      Load session
+                    </button>
+                    <button
+                      th:onclick="deleteSession([[${componentSession.id}]])"
+                      class="py-1.5 px-2.5 ml-4 rounded-sm btn-color-red bg-transparent border text-sm font-semibold hover:delay-150 hover:duration-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ul>
+        </nav>
+      </div>
+      <!-- Main Content -->
+      <div class="flex items-center justify-center main-content bg-color-navy">
+        <div id="text-to-copy" class="starter-template">
+          <div th:utext="${sessionFragmentTest}">HERE</div>
+        </div>
+      </div>
+    </div>
+    <script th:src="@{/js/main.js}"></script>
+  </body>
+</html>

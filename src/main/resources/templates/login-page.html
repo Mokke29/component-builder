@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Project</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-color-navy">
+    <section class="bg-color-navy mt-60">
+      <div
+        class="w-full lg:w-4/12 px-4 mx-auto pt-6 bg-color-light-navy rounded-md shadow-lg"
+      >
+        <div
+          class="relative flex flex-col min-w-0 break-words w-full mb-6 rounded-lg bg-blueGray-200 border-0"
+        >
+          <div class="flex-auto px-4 lg:px-10 py-10 pt-0 mt-12">
+            <p th:if="${param.error}" class="text-center text-color-green">
+              You entered wrong username/password.
+            </p>
+            <p th:if="${param.logout}" class="text-center text-color-green">
+              You have been logged out.
+            </p>
+            <form action="#" th:action="@{/authenticate}" method="POST">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-xs font-bold mb-2 text-color-slate"
+                  for="grid-password"
+                  >Username</label
+                ><input
+                  id="username"
+                  type="text"
+                  name="username"
+                  class="border-0 px-3 py-3 text-color-slate bg-color-navy rounded-sm text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                  placeholder="Username"
+                  required
+                />
+              </div>
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-xs font-bold mb-2 text-color-slate"
+                  for="grid-password"
+                  >Password</label
+                ><input
+                  id="password"
+                  type="password"
+                  name="password"
+                  class="border-0 px-3 py-3 text-color-slate bg-color-navy rounded-sm text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                  placeholder="Password"
+                  required
+                />
+              </div>
+              <div class="text-center mt-6">
+                <input
+                  type="submit"
+                  value="Login"
+                  class="input-send py-2 px-5 rounded-sm btn-color bg-transparent border text-sm font-semibold hover:delay-150 hover:duration-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                />
+                <a
+                  th:href="@{/register/registration-form}"
+                  class="ml-8 py-2 px-5 rounded-sm btn-color bg-transparent border text-sm font-semibold hover:delay-150 hover:duration-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  >Register</a
+                >
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        var loginContainer = document.querySelector('.login-container');
+        loginContainer.style.opacity = 0;
+
+        setTimeout(function () {
+          loginContainer.style.opacity = 1;
+        }, 250);
+      });
+    </script>
+  </body>
+</html>

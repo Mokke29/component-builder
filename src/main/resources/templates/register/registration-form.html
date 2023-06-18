@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Registration Form</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/main.css" />
+  </head>
+
+  <body class="bg-color-navy">
+    <!-- <div class="container">
+
+    <div id="loginbox" style="margin-top: 50px;"
+         class="col-md-3 col-md-offset-2 col-sm-6 col-sm-offset-2">
+
+        <div class="card border-info">
+
+            <div class="card-body">
+
+                <div class="card-text">
+
+                     Registration Form 
+                    <form action="#" th:action="@{/register/process-registration-form}"
+                          th:object="${user}"
+                          method="POST" class="form-horizontal">
+
+                         Place for messages: error, alert etc ... 
+                        <div class="form-group">
+                            <div class="col-xs-15">
+                                <div>
+
+                                     Check for login error 
+
+                                    <div th:if="${param.registrationError}">
+
+                                        <div class="alert alert-danger col-xs-offset-1 col-xs-10">
+                                            <span th:text="${param.registrationError}"></span>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                         User name
+                        <div style="margin-bottom: 25px" class="input-group">
+                            <input type="text" th:field="*{username}" placeholder="Username (*)" class="form-control" />
+                        </div>
+
+                        <div th:if="${#fields.hasErrors('username')}"
+                             style="margin-bottom: 25px" class="text-danger">
+                            <ul>
+                                <li th:each="err : ${#fields.errors('username')}" th:text="'User name ' + ${err}" />
+                            </ul>
+                        </div>
+
+                         Password
+                        <div style="margin-bottom: 25px" class="input-group">
+                            <input type="text" th:field="*{password}" placeholder="Password (*)" class="form-control" />
+                        </div>
+
+                        <div th:if="${#fields.hasErrors('password')}"
+                             style="margin-bottom: 25px" class="text-danger">
+                            <ul>
+                                <li th:each="err : ${#fields.errors('password')}" th:text="'Password ' + ${err}" />
+                            </ul>
+                        </div>
+                         Registration Button 
+                        <div style="margin-top: 10px" class="form-group">
+                            <div class="col-sm-6 controls">
+                                <button type="submit" class="btn btn-primary">Register</button>
+                            </div>
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div> -->
+
+    <section class="bg-color-navy mt-60">
+      <div
+        class="w-full lg:w-4/12 px-4 mx-auto pt-6 bg-color-light-navy rounded-md shadow-lg"
+      >
+        <div
+          class="relative flex flex-col min-w-0 break-words w-full mb-6 rounded-lg bg-blueGray-200 border-0"
+        >
+          <div class="flex-auto px-4 lg:px-10 py-10 pt-0 mt-6">
+            <h1 class="text-center text-color-green text-3xl font-bold mb-8">
+              Registration
+            </h1>
+            <div th:if="${param.registrationError}">
+              <div class="alert alert-danger col-xs-offset-1 col-xs-10">
+                <span th:text="${param.registrationError}"></span>
+              </div>
+            </div>
+            <form
+              action="#"
+              th:action="@{/register/process-registration-form}"
+              th:object="${user}"
+              method="POST"
+              class="form-horizontal"
+            >
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-xs font-bold mb-2 text-color-slate"
+                  for="grid-password"
+                  >Username</label
+                ><input
+                  id="username"
+                  type="text"
+                  th:field="*{username}"
+                  name="username"
+                  class="border-0 px-3 py-3 text-color-slate bg-color-navy rounded-sm text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                  placeholder="Username"
+                  required
+                />
+              </div>
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-xs font-bold mb-2 text-color-slate"
+                  for="grid-password"
+                  >Password</label
+                ><input
+                  id="password"
+                  type="text"
+                  th:field="*{password}"
+                  name="password"
+                  class="border-0 px-3 py-3 text-color-slate bg-color-navy rounded-sm text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                  placeholder="Password"
+                  required
+                />
+              </div>
+              <div class="text-center mt-6">
+                <input
+                  type="submit"
+                  value="Register"
+                  class="input-send py-2 px-5 rounded-sm btn-color bg-transparent border text-sm font-semibold hover:delay-150 hover:duration-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                />
+                <a
+                  th:href="@{/login-form}"
+                  class="ml-8 py-2 px-5 rounded-sm logout-btn-color bg-transparent border text-sm font-semibold hover:delay-150 hover:duration-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  >Login</a
+                >
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
